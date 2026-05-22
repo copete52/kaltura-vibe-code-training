@@ -216,8 +216,16 @@
       <button id="start-btn">Begin the Challenge</button>
     </div>
 
-    <!-- Avatar (shown after start) -->
-    <div id="avatar-container"></div>
+    <!-- Avatar — loads immediately so it's warm when DPP fires -->
+    <div id="avatar-container">
+      <iframe
+        id="got-avatar"
+        src="https://meet.avatar.us.kaltura.ai/6931df33dd072609137dfe46/talk-to-agent?aiclid=eHkahqrU&flow_id=agent-30"
+        allow="camera; microphone; fullscreen"
+        style="width:100%;height:100%;border:none;display:block;"
+        title="Ashara Dayne - GOT Trivia"
+      ></iframe>
+    </div>
 
     <!-- Session status -->
     <div id="status-bar">Session active — answer wisely</div>
@@ -333,14 +341,7 @@
       document.getElementById('avatar-container').style.display = 'block';
       document.getElementById('status-bar').style.display       = 'block';
 
-      const iframe    = document.createElement('iframe');
-      iframe.id       = 'got-avatar';
-      iframe.src      = AVATAR_URL;
-      iframe.style.cssText = 'width:100%;height:100%;border:none;';
-      iframe.allow    = 'camera; microphone; fullscreen';
-      document.getElementById('avatar-container').appendChild(iframe);
-
-      // Fire DPP 3s after name submit — same pattern as the working reference
+      // Avatar iframe is already loaded — fire DPP 3s after name submit
       setTimeout(injectContext, 3000);
 
       // Listen for messages from the avatar
