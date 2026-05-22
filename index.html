@@ -235,9 +235,10 @@
     const WEBHOOK_URL = 'https://webhook.site/97746e0e-6905-498a-afde-3e5fb39fd3a4';
     const AVATAR_URL  = `https://meet.avatar.us.kaltura.ai/${CLIENT_ID}/talk-to-agent?aiclid=eHkahqrU&flow_id=${FLOW_ID}`;
 
-    // ── Session data ─────────────────────────────────────────────────────────
-    const session = {
-      userName:     '',
+    // ── State ────────────────────────────────────────────────────────────────
+    let userName    = '';
+    let lastPayload = null;
+    const session   = {
       sessionStart: null,
       sessionEnd:   null,
       score:        0,
@@ -245,106 +246,147 @@
       transcript:   []
     };
 
-    // ── Helpers ──────────────────────────────────────────────────────────────
-    function getTimeOfDay() {
-      const h = new Date().getHours();
-      if (h >= 5  && h < 12) return 'morning';
-      if (h >= 12 && h < 17) return 'afternoon';
-      if (h >= 17 && h < 21) return 'evening';
-      return 'night';
-    }
-
-    function buildDPPContent(userName) {
-      const now         = new Date();
-      const timeLabel   = getTimeOfDay();
-      const pageContent = document.getElementById('lore').innerText.trim();
-
-      return JSON.stringify({
-        v:    '2',
-        user: { first_name: userName },
-        inst: [
-          `The person you are speaking with is named ${userName}. Call them ${userName}.`,
-          `It is ${timeLabel} (${now.toLocaleTimeString()}).`,
-          `Page context: ${pageContent}`
-        ]
+    // ── Time context ─────────────────────────────────────────────────────────
+    function getTimeContext() {
+      const now  = new Date();
+      const hour = now.getHours();
+      const min  = String(now.getMinutes()).padStart(2, '0');
+      const timeStr = hour + ':' + min;
+      const dateStr = now.toLocaleDateString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
       });
+      let period, greeting;
+      if      (hour >= 5  && hour < 12) { period = 'morning';    greeting = 'Good morning'; }
+      else if (hour >= 12 && hour < 17) { period = 'afternoon';  greeting = 'Good afternoon'; }
+      else if (hour >= 17 && hour < 21) { period = 'evening';    greeting = 'Good evening'; }
+      else                              { period = 'late night'; greeting = 'Greetings, night owl'; }
+      return { timeStr, dateStr, period, greeting };
     }
 
-    function finishSession() {
-      if (session.sessionEnd) return; // guard against double-fire
+    // ── Build DPP — plain text with explicit greeting instruction ────────────
+    function buildDPPContent() {
+      const ctx  = getTimeContext();
+      const page = document.getElementById('lore').innerText.trim();
+      return [
+        'SYSTEM INJECTION — Session Start:',
+        '- Student name: '    + userName,
+        '- Current time: '    + ctx.timeStr + ' on ' + ctx.dateStr,
+        '- Time period: '     + ctx.period,
+        '- Greeting to use: "' + ctx.greeting + ', ' + userName + '!"',
+        '- Page: Game of Thrones Trivia Challenge',
+        '- Page context: '    + page,
+        '',
+        'Instructions: Speak your greeting out loud as your very first line, addressing ' + userName + ' by name. Then introduce yourself as Ashara Dayne of Starfall and begin the trivia challenge. Increase difficulty on correct answers (max 5), decrease on incorrect (min 1). At session end, output the full JSON schema summary.'
+      ].join('\n');
+    }
+
+    // ── Inject DPP into avatar ────────────────────────────────────────────────
+    function injectContext() {
+      const iframe = document.getElementById('got-avatar');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage(
+          { type: 'eself-dynamic-prompt-message', content: buildDPPContent() },
+          '*'
+        );
+      }
+    }
+
+    // ── Finish session ───────────────────────────────────────────────────────
+    function finishSession(data) {
+      if (session.sessionEnd) return;
       session.sessionEnd = new Date().toISOString();
 
-      localStorage.setItem('got-trivia-session', JSON.stringify(session));
+      const payload = {
+        event:           'trivia_session_complete',
+        timestamp:       session.sessionEnd,
+        student:         userName,
+        page:            'Game of Thrones Trivia Challenge — Ashara Dayne',
+        session_summary: data || session
+      };
+      lastPayload = payload;
+
+      localStorage.setItem('got-trivia-session', JSON.stringify({
+        userName,
+        sessionStart: session.sessionStart,
+        sessionEnd:   session.sessionEnd,
+        score:        session.score,
+        total:        session.total,
+        transcript:   session.transcript,
+        summary:      data
+      }));
 
       fetch(WEBHOOK_URL, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(session)
+        body:    JSON.stringify(payload)
       }).catch(err => console.warn('Webhook post failed:', err));
 
       window.location.href = 'results.html';
     }
 
-    // ── Start button ─────────────────────────────────────────────────────────
-    document.getElementById('start-btn').addEventListener('click', function () {
-      const userName = document.getElementById('user-name-input').value.trim() || 'Traveler';
-
-      session.userName     = userName;
+    // ── Start session ─────────────────────────────────────────────────────────
+    function startSession(name) {
+      userName = name;
       session.sessionStart = new Date().toISOString();
 
       document.getElementById('start-screen').style.display     = 'none';
       document.getElementById('avatar-container').style.display = 'block';
       document.getElementById('status-bar').style.display       = 'block';
 
-      // Build raw iframe — pass name + time as URL params so formLeadInfo is populated at session creation
-      const avatarUrl = AVATAR_URL
-        + '&first_name=' + encodeURIComponent(userName)
-        + '&name='       + encodeURIComponent(userName)
-        + '&time_of_day='+ encodeURIComponent(getTimeOfDay());
-      const iframe = document.createElement('iframe');
-      iframe.src   = avatarUrl;
+      const iframe    = document.createElement('iframe');
+      iframe.id       = 'got-avatar';
+      iframe.src      = AVATAR_URL;
       iframe.style.cssText = 'width:100%;height:100%;border:none;';
-      iframe.allow = 'microphone; camera; autoplay';
+      iframe.allow    = 'camera; microphone; fullscreen';
       document.getElementById('avatar-container').appendChild(iframe);
 
-      // Inject DPP after iframe initializes (3s matches the assignment pattern)
-      iframe.addEventListener('load', function () {
-        setTimeout(function () {
-          iframe.contentWindow.postMessage({
-            type:    'eself-dynamic-prompt-message',
-            content: buildDPPContent(userName)
-          }, '*');
-        }, 3000);
-      });
+      // Fire DPP 3s after name submit — same pattern as the working reference
+      setTimeout(injectContext, 3000);
 
-      // Listen for messages back from the avatar iframe
+      // Listen for messages from the avatar
       window.addEventListener('message', function (event) {
-        const data = event.data;
-        if (!data || typeof data !== 'object') return;
+        const d = event.data;
+        if (!d || typeof d !== 'object') return;
+        if (d.type) console.log('[avatar msg]', d.type, d);
 
-        // Log all types during development so we can see what the avatar sends
-        if (data.type) console.log('[avatar msg]', data.type, data);
-
-        // Transcript — agent
-        if (data.type === 'eself-agent-message') {
-          const text = data.content || '';
+        // Transcript
+        if (d.type === 'eself-agent-message') {
+          const text = d.content || '';
           session.transcript.push({ role: 'agent', text, timestamp: new Date().toISOString() });
-          if (/well played|lannisters would be impressed|correct|right/i.test(text)) {
-            session.score++;
-          }
+          if (/well played|lannisters would be impressed|correct|right/i.test(text)) session.score++;
+        }
+        if (d.type === 'eself-user-message') {
+          session.transcript.push({ role: 'user', text: d.content || '', timestamp: new Date().toISOString() });
         }
 
-        // Transcript — user
-        if (data.type === 'eself-user-message') {
-          const text = data.content || '';
-          session.transcript.push({ role: 'user', text, timestamp: new Date().toISOString() });
+        // Session end — all known event types from the platform
+        if (d.type === 'eself-end-call'         || d.type === 'EndCall'    ||
+            d.type === 'session-end'             || d.type === 'call-ended' ||
+            d.type === 'eself-conversation-ended'|| d.type === 'conversation-ended') {
+          finishSession(d.summary || d.payload || null);
         }
-
-        // Conversation ended
-        if (data.type === 'eself-conversation-ended' || data.type === 'conversation-ended') {
-          finishSession();
+        if (d.type === 'eself-session-summary' || d.type === 'trivia-summary') {
+          finishSession(d.payload || d);
         }
       });
+    }
+
+    // ── Name input ────────────────────────────────────────────────────────────
+    document.getElementById('start-btn').addEventListener('click', function () {
+      const val = document.getElementById('user-name-input').value.trim();
+      if (val) startSession(val);
+    });
+    document.getElementById('user-name-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        const val = this.value.trim();
+        if (val) startSession(val);
+      }
+    });
+
+    // ── URL param support: ?name=Corey skips the input ───────────────────────
+    window.addEventListener('load', function () {
+      const urlName = new URLSearchParams(window.location.search).get('name') || '';
+      if (urlName) startSession(urlName);
     });
   </script>
 
