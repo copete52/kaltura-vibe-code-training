@@ -25,161 +25,191 @@
       border-bottom: 1px solid #3d2e1a;
       background: linear-gradient(180deg, #1a0e00 0%, #0a0a0a 100%);
     }
-
-    .sigil {
-      font-size: 36px;
-      letter-spacing: 8px;
-      color: #c9a84c;
-      margin-bottom: 12px;
-    }
-
+    .sigil { font-size: 36px; letter-spacing: 8px; color: #c9a84c; margin-bottom: 12px; }
     header h1 {
       font-family: 'Cinzel', serif;
       font-size: clamp(22px, 4vw, 42px);
-      font-weight: 900;
-      color: #c9a84c;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      font-weight: 900; color: #c9a84c;
+      letter-spacing: 3px; text-transform: uppercase;
     }
-
-    header p {
-      font-style: italic;
-      color: #a08060;
-      margin-top: 8px;
-      font-size: 16px;
-    }
+    header p { font-style: italic; color: #a08060; margin-top: 8px; font-size: 16px; }
 
     /* ── Main layout ── */
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
+    main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
 
     /* ── Lore section ── */
     #lore {
-      background: #110d06;
-      border: 1px solid #3d2e1a;
+      background: #110d06; border: 1px solid #3d2e1a;
       border-left: 4px solid #c9a84c;
-      padding: 28px 32px;
-      margin-bottom: 40px;
-      border-radius: 2px;
+      padding: 28px 32px; margin-bottom: 40px; border-radius: 2px;
     }
-
     #lore h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 16px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #c9a84c;
-      margin-bottom: 16px;
+      font-family: 'Cinzel', serif; font-size: 16px;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: #c9a84c; margin-bottom: 16px;
     }
-
-    #lore p {
-      color: #c8b48a;
-      margin-bottom: 12px;
-    }
-
+    #lore p { color: #c8b48a; margin-bottom: 12px; }
     #lore p:last-child { margin-bottom: 0; }
 
     /* ── Start screen ── */
-    #start-screen {
-      text-align: center;
-      padding: 48px 24px;
-    }
-
+    #start-screen { text-align: center; padding: 48px 24px; }
     #start-screen h2 {
       font-family: 'Cinzel', serif;
       font-size: clamp(18px, 3vw, 28px);
-      color: #e8d5a3;
-      margin-bottom: 12px;
+      color: #e8d5a3; margin-bottom: 12px;
     }
-
-    #start-screen p {
-      color: #a08060;
-      margin-bottom: 32px;
-      font-style: italic;
-    }
+    #start-screen p { color: #a08060; margin-bottom: 32px; font-style: italic; }
 
     #user-name-input {
-      display: block;
-      margin: 0 auto 20px;
+      display: block; margin: 0 auto 20px;
       background: transparent;
-      border: 1px solid #3d2e1a;
-      border-bottom-color: #c9a84c;
-      color: #e8d5a3;
-      font-family: 'EB Garamond', serif;
-      font-size: 18px;
-      padding: 10px 16px;
-      text-align: center;
-      width: 280px;
-      outline: none;
+      border: 1px solid #3d2e1a; border-bottom-color: #c9a84c;
+      color: #e8d5a3; font-family: 'EB Garamond', serif;
+      font-size: 18px; padding: 10px 16px;
+      text-align: center; width: 280px; outline: none;
     }
-
     #user-name-input::placeholder { color: #4a3a28; }
     #user-name-input:focus { border-color: #c9a84c; }
 
     #start-btn {
-      font-family: 'Cinzel', serif;
-      font-size: 15px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      background: transparent;
-      color: #c9a84c;
-      border: 2px solid #c9a84c;
-      padding: 16px 48px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      font-family: 'Cinzel', serif; font-size: 15px;
+      letter-spacing: 3px; text-transform: uppercase;
+      background: transparent; color: #c9a84c;
+      border: 2px solid #c9a84c; padding: 16px 48px;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
     }
-
-    #start-btn:hover {
-      background: #c9a84c;
-      color: #0a0a0a;
-    }
+    #start-btn:hover { background: #c9a84c; color: #0a0a0a; }
 
     /* ── Avatar container ── */
     #avatar-container {
-      width: 100%;
-      max-width: 800px;
-      height: 560px;
-      margin: 0 auto;
-      display: none;
-      border: 1px solid #3d2e1a;
-      background: #000;
+      width: 100%; max-width: 800px; height: 560px;
+      margin: 0 auto; display: none;
+      border: 1px solid #3d2e1a; background: #000;
     }
 
     /* ── Status bar ── */
     #status-bar {
-      display: none;
-      text-align: center;
-      padding: 12px;
-      font-family: 'Cinzel', serif;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #a08060;
-      border-top: 1px solid #3d2e1a;
-      margin-top: 16px;
+      display: none; text-align: center; padding: 12px;
+      font-family: 'Cinzel', serif; font-size: 12px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #a08060; border-top: 1px solid #3d2e1a; margin-top: 16px;
     }
 
     /* ── Divider ── */
-    .divider {
-      text-align: center;
-      color: #3d2e1a;
-      letter-spacing: 12px;
-      margin: 32px 0;
-      font-size: 20px;
-    }
+    .divider { text-align: center; color: #3d2e1a; letter-spacing: 12px; margin: 32px 0; font-size: 20px; }
 
     /* ── Footer ── */
     footer {
-      text-align: center;
-      padding: 24px;
+      text-align: center; padding: 24px;
       border-top: 1px solid #1a1510;
-      color: #4a3a28;
-      font-size: 13px;
-      font-style: italic;
+      color: #4a3a28; font-size: 13px; font-style: italic;
     }
+
+    /* ── Results Modal ── */
+    #results-modal {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      overflow-y: auto;
+      padding: 24px 16px;
+    }
+    #results-modal.show { display: block; }
+    #results-modal .modal-inner {
+      max-width: 820px; margin: 0 auto;
+      background: #0a0a0a;
+      border: 1px solid #3d2e1a;
+      border-radius: 2px;
+    }
+    #results-modal .modal-header {
+      text-align: center;
+      padding: 48px 24px 32px;
+      border-bottom: 1px solid #3d2e1a;
+      background: linear-gradient(180deg, #1a0e00 0%, #0a0a0a 100%);
+    }
+    #results-modal .modal-header h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(20px, 4vw, 38px);
+      font-weight: 900; color: #c9a84c;
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+    #results-modal .modal-header p { font-style: italic; color: #a08060; margin-top: 8px; }
+    #results-modal .modal-body { padding: 48px 24px 60px; }
+
+    /* ── Score card ── */
+    .score-card {
+      text-align: center; padding: 48px 32px;
+      background: #110d06; border: 1px solid #3d2e1a; margin-bottom: 40px;
+    }
+    .score-label {
+      font-family: 'Cinzel', serif; font-size: 12px;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: #a08060; margin-bottom: 16px;
+    }
+    .score-number {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(56px, 12vw, 96px);
+      font-weight: 900; line-height: 1; margin-bottom: 8px;
+    }
+    .score-number.perfect { color: #c9a84c; }
+    .score-number.great   { color: #7aad5a; }
+    .score-number.average { color: #c8a44a; }
+    .score-number.poor    { color: #8b1a1a; }
+    .score-verdict {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(14px, 2.5vw, 20px);
+      color: #e8d5a3; margin-bottom: 8px;
+    }
+    .score-meta { font-size: 14px; color: #6a5540; font-style: italic; }
+
+    /* ── Transcript / Q list ── */
+    .section-heading {
+      font-family: 'Cinzel', serif; font-size: 13px;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: #c9a84c; border-bottom: 1px solid #3d2e1a;
+      padding-bottom: 12px; margin-bottom: 24px;
+    }
+    .transcript-list { list-style: none; }
+    .transcript-list li {
+      padding: 14px 0; border-bottom: 1px solid #1a1510;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .transcript-list li:last-child { border-bottom: none; }
+    .turn-role {
+      font-family: 'Cinzel', serif; font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 2px;
+      flex-shrink: 0; margin-top: 3px;
+    }
+    .turn-role.agent { background: #2a1f0a; color: #c9a84c; border: 1px solid #3d2e1a; }
+    .turn-role.user  { background: #0a1a2a; color: #7aadcc; border: 1px solid #1a3a4a; }
+    .turn-text { color: #c8b48a; flex: 1; }
+
+    /* ── Modal actions ── */
+    .modal-actions {
+      text-align: center; margin-top: 48px;
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn {
+      font-family: 'Cinzel', serif; font-size: 13px;
+      letter-spacing: 3px; text-transform: uppercase;
+      padding: 14px 40px; cursor: pointer;
+      text-decoration: none; display: inline-block;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary { background: transparent; color: #c9a84c; border: 2px solid #c9a84c; }
+    .btn-primary:hover { background: #c9a84c; color: #0a0a0a; }
+    .btn-secondary { background: transparent; color: #6a5540; border: 2px solid #3d2e1a; }
+    .btn-secondary:hover { color: #e8d5a3; border-color: #6a5540; }
+
+    /* ── Webhook status ── */
+    #webhook-status {
+      margin-top: 12px; padding: 8px 16px; border-radius: 2px;
+      font-family: 'Cinzel', serif; font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase;
+      text-align: center;
+    }
+    #webhook-status.ok  { background: #0d2a0d; color: #7aad5a; border: 1px solid #2a4a2a; }
+    #webhook-status.err { background: #2a0d0d; color: #cc6666; border: 1px solid #4a2a2a; }
   </style>
 </head>
 <body>
@@ -192,7 +222,6 @@
 
   <main>
 
-    <!-- Lore section — content here is scraped for DPP injection -->
     <section id="lore">
       <h2>Know Your World</h2>
       <p>
@@ -208,7 +237,6 @@
 
     <div class="divider">⚜ ⚜ ⚜</div>
 
-    <!-- Start screen -->
     <div id="start-screen">
       <h2>Are you prepared to face Ashara Dayne?</h2>
       <p>She has tested lords and maesters alike. Few have impressed her.</p>
@@ -227,7 +255,6 @@
       ></iframe>
     </div>
 
-    <!-- Session status -->
     <div id="status-bar">Session active — answer wisely</div>
 
   </main>
@@ -236,23 +263,36 @@
     "When you play the game of thrones, you win or you die." — Cersei Lannister
   </footer>
 
+  <!-- ── Results Modal ── -->
+  <div id="results-modal">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <div class="sigil">⚔ ✦ ⚔</div>
+        <h2>Session Complete</h2>
+        <p>Ashara Dayne has rendered her verdict</p>
+      </div>
+      <div class="modal-body" id="results-body">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
   <script>
     // ── Config ──────────────────────────────────────────────────────────────
-    const CLIENT_ID   = '6931df33dd072609137dfe46';
-    const FLOW_ID     = 'agent-30';
     const WEBHOOK_URL = 'https://webhook.site/97746e0e-6905-498a-afde-3e5fb39fd3a4';
-    const AVATAR_URL  = `https://meet.avatar.us.kaltura.ai/${CLIENT_ID}/talk-to-agent?aiclid=eHkahqrU&flow_id=${FLOW_ID}`;
+
+    const QUESTIONS = [
+      { label: 'Q1 — Easy',         question: 'Who is this person?',                                                                              answer: 'Tyrion Lannister' },
+      { label: 'Q2 — Moderate',     question: 'What is the name of this seat of power, and what is it made from?',                                answer: 'The Iron Throne, forged from the swords of Aegon the Conqueror\'s defeated enemies' },
+      { label: 'Q3 — Intermediate', question: 'What house uses this animal as its sigil, and name three of the Stark children\'s direwolves?',    answer: 'House Stark. Any three of: Ghost, Grey Wind, Lady, Nymeria, Summer, Shaggydog' },
+      { label: 'Q4 — Hard',         question: 'Aegon the Conqueror had two sister-wives. Name both and the dragons they rode.',                    answer: 'Visenya rode Vhagar, Rhaenys rode Meraxes' },
+      { label: 'Q5 — Expert',       question: 'Name the sellsword company Daenerys faces at Yunkai and who leads them.',                          answer: 'The Second Sons, led by Mero of Braavos (the Titan\'s Bastard)' }
+    ];
 
     // ── State ────────────────────────────────────────────────────────────────
     let userName    = '';
     let lastPayload = null;
-    const session   = {
-      sessionStart: null,
-      sessionEnd:   null,
-      score:        0,
-      total:        5,
-      transcript:   []
-    };
+    const session   = { sessionStart: null, sessionEnd: null, score: 0, total: 5, transcript: [] };
 
     // ── Time context ─────────────────────────────────────────────────────────
     function getTimeContext() {
@@ -260,9 +300,7 @@
       const hour = now.getHours();
       const min  = String(now.getMinutes()).padStart(2, '0');
       const timeStr = hour + ':' + min;
-      const dateStr = now.toLocaleDateString('en-US', {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-      });
+      const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
       let period, greeting;
       if      (hour >= 5  && hour < 12) { period = 'morning';    greeting = 'Good morning'; }
       else if (hour >= 12 && hour < 17) { period = 'afternoon';  greeting = 'Good afternoon'; }
@@ -271,24 +309,24 @@
       return { timeStr, dateStr, period, greeting };
     }
 
-    // ── Build DPP — plain text with explicit greeting instruction ────────────
+    // ── Build DPP ────────────────────────────────────────────────────────────
     function buildDPPContent() {
       const ctx  = getTimeContext();
       const page = document.getElementById('lore').innerText.trim();
       return [
         'SYSTEM INJECTION — Session Start:',
-        '- Student name: '    + userName,
-        '- Current time: '    + ctx.timeStr + ' on ' + ctx.dateStr,
-        '- Time period: '     + ctx.period,
+        '- Student name: '     + userName,
+        '- Current time: '     + ctx.timeStr + ' on ' + ctx.dateStr,
+        '- Time period: '      + ctx.period,
         '- Greeting to use: "' + ctx.greeting + ', ' + userName + '!"',
         '- Page: Game of Thrones Trivia Challenge',
-        '- Page context: '    + page,
+        '- Page context: '     + page,
         '',
         'Instructions: Speak your greeting out loud as your very first line, addressing ' + userName + ' by name. Then introduce yourself as Ashara Dayne of Starfall and begin the trivia challenge. Increase difficulty on correct answers (max 5), decrease on incorrect (min 1). At session end, output the full JSON schema summary.'
       ].join('\n');
     }
 
-    // ── Inject DPP into avatar ────────────────────────────────────────────────
+    // ── Inject DPP ───────────────────────────────────────────────────────────
     function injectContext() {
       const iframe = document.getElementById('got-avatar');
       if (iframe && iframe.contentWindow) {
@@ -299,37 +337,125 @@
       }
     }
 
+    // ── Results helpers ──────────────────────────────────────────────────────
+    function getVerdict(score, total) {
+      const pct = score / total;
+      if (pct === 1)  return { text: 'The realm bows before you. A true master of lore.',       cls: 'perfect' };
+      if (pct >= 0.8) return { text: 'Well played. Even the Lannisters would be impressed.',     cls: 'great' };
+      if (pct >= 0.6) return { text: 'A respectable showing. The Citadel would take note.',      cls: 'average' };
+      if (pct >= 0.4) return { text: 'You have much to learn, but courage counts for something.', cls: 'average' };
+      return             { text: 'The ravens have witnessed worse… but not often.',              cls: 'poor' };
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function sendWebhook(payload) {
+      const el = document.getElementById('webhook-status');
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(r => {
+        el.textContent = r.ok ? '✦ Session data sent to webhook' : '⚠ Webhook error: ' + r.status;
+        el.className   = r.ok ? 'ok' : 'err';
+      }).catch(err => {
+        el.textContent = '⚠ Webhook failed: ' + err.message;
+        el.className   = 'err';
+      });
+    }
+
+    // ── Show results modal ───────────────────────────────────────────────────
+    function showResults(data) {
+      const score   = session.score || 0;
+      const total   = session.total || 5;
+      const verdict = getVerdict(score, total);
+
+      let transcriptHTML = '';
+      if (session.transcript && session.transcript.length > 0) {
+        const items = session.transcript.map(t => `
+          <li>
+            <span class="turn-role ${t.role}">${t.role === 'agent' ? 'Ashara' : 'You'}</span>
+            <span class="turn-text">${escapeHtml(t.text)}</span>
+          </li>`).join('');
+        transcriptHTML = `
+          <div class="divider">⚜ ⚜ ⚜</div>
+          <h2 class="section-heading">Conversation Transcript</h2>
+          <ul class="transcript-list">${items}</ul>`;
+      }
+
+      document.getElementById('results-body').innerHTML = `
+        <div class="score-card">
+          <div class="score-label">Final Score</div>
+          <div class="score-number ${verdict.cls}">${score} / ${total}</div>
+          <div class="score-verdict">${verdict.text}</div>
+          <div class="score-meta">${userName ? userName + ' &nbsp;·&nbsp; ' : ''}${new Date().toLocaleString()}</div>
+        </div>
+
+        <div class="divider">⚜ ⚜ ⚜</div>
+
+        <h2 class="section-heading">The Five Questions</h2>
+        <ul class="transcript-list">
+          ${QUESTIONS.map(q => `
+            <li>
+              <span class="turn-role agent">${q.label}</span>
+              <span class="turn-text">
+                <strong>${q.question}</strong><br>
+                <span style="color:#7a6a50;font-style:italic;">Correct answer: ${q.answer}</span>
+              </span>
+            </li>`).join('')}
+        </ul>
+
+        ${transcriptHTML}
+
+        <div id="webhook-status"></div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary" onclick="resetSession()">Challenge Again</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('results-modal').classList.remove('show')">Close</button>
+        </div>
+      `;
+
+      document.getElementById('results-modal').classList.add('show');
+
+      // Fire webhook
+      lastPayload = {
+        event: 'trivia_session_complete',
+        timestamp: new Date().toISOString(),
+        student: userName,
+        page: 'Game of Thrones Trivia Challenge — Ashara Dayne',
+        score: score,
+        total: total,
+        transcript: session.transcript,
+        session_summary: data || {}
+      };
+      sendWebhook(lastPayload);
+    }
+
     // ── Finish session ───────────────────────────────────────────────────────
     function finishSession(data) {
       if (session.sessionEnd) return;
       session.sessionEnd = new Date().toISOString();
+      showResults(data);
+    }
 
-      const payload = {
-        event:           'trivia_session_complete',
-        timestamp:       session.sessionEnd,
-        student:         userName,
-        page:            'Game of Thrones Trivia Challenge — Ashara Dayne',
-        session_summary: data || session
-      };
-      lastPayload = payload;
-
-      localStorage.setItem('got-trivia-session', JSON.stringify({
-        userName,
-        sessionStart: session.sessionStart,
-        sessionEnd:   session.sessionEnd,
-        score:        session.score,
-        total:        session.total,
-        transcript:   session.transcript,
-        summary:      data
-      }));
-
-      fetch(WEBHOOK_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(payload)
-      }).catch(err => console.warn('Webhook post failed:', err));
-
-      window.location.href = 'results.html';
+    // ── Reset ────────────────────────────────────────────────────────────────
+    function resetSession() {
+      document.getElementById('results-modal').classList.remove('show');
+      document.getElementById('avatar-container').style.display = 'none';
+      document.getElementById('status-bar').style.display       = 'none';
+      document.getElementById('start-screen').style.display     = 'block';
+      document.getElementById('user-name-input').value = '';
+      session.sessionStart = null;
+      session.sessionEnd   = null;
+      session.score        = 0;
+      session.transcript   = [];
+      userName = '';
+      // Reload the iframe so the avatar resets
+      const iframe = document.getElementById('got-avatar');
+      iframe.src = iframe.src;
     }
 
     // ── Start session ─────────────────────────────────────────────────────────
@@ -341,16 +467,13 @@
       document.getElementById('avatar-container').style.display = 'block';
       document.getElementById('status-bar').style.display       = 'block';
 
-      // Avatar iframe is already loaded — fire DPP 3s after name submit
       setTimeout(injectContext, 3000);
 
-      // Listen for messages from the avatar
       window.addEventListener('message', function (event) {
         const d = event.data;
         if (!d || typeof d !== 'object') return;
         if (d.type) console.log('[avatar msg]', d.type, d);
 
-        // Transcript
         if (d.type === 'eself-agent-message') {
           const text = d.content || '';
           session.transcript.push({ role: 'agent', text, timestamp: new Date().toISOString() });
@@ -360,10 +483,9 @@
           session.transcript.push({ role: 'user', text: d.content || '', timestamp: new Date().toISOString() });
         }
 
-        // Session end — all known event types from the platform
-        if (d.type === 'eself-end-call'         || d.type === 'EndCall'    ||
-            d.type === 'session-end'             || d.type === 'call-ended' ||
-            d.type === 'eself-conversation-ended'|| d.type === 'conversation-ended') {
+        if (d.type === 'eself-end-call'          || d.type === 'EndCall'     ||
+            d.type === 'session-end'              || d.type === 'call-ended'  ||
+            d.type === 'eself-conversation-ended' || d.type === 'conversation-ended') {
           finishSession(d.summary || d.payload || null);
         }
         if (d.type === 'eself-session-summary' || d.type === 'trivia-summary') {
@@ -384,7 +506,7 @@
       }
     });
 
-    // ── URL param support: ?name=Corey skips the input ───────────────────────
+    // ── URL param: ?name=Corey skips the input ────────────────────────────────
     window.addEventListener('load', function () {
       const urlName = new URLSearchParams(window.location.search).get('name') || '';
       if (urlName) startSession(urlName);
