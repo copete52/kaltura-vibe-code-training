@@ -244,11 +244,10 @@
       <button id="start-btn">Begin the Challenge</button>
     </div>
 
-    <!-- Avatar — loads immediately so it's warm when DPP fires -->
+    <!-- Avatar — src is set dynamically at session start with user name in URL -->
     <div id="avatar-container">
       <iframe
         id="got-avatar"
-        src="https://meet.avatar.us.kaltura.ai/6931df33dd072609137dfe46/talk-to-agent?aiclid=eHkahqrU&flow_id=agent-30"
         allow="camera; microphone; fullscreen"
         style="width:100%;height:100%;border:none;display:block;"
         title="Ashara Dayne - GOT Trivia"
@@ -279,7 +278,9 @@
 
   <script>
     // ── Config ──────────────────────────────────────────────────────────────
-    const WEBHOOK_URL = 'https://webhook.site/97746e0e-6905-498a-afde-3e5fb39fd3a4';
+    const WEBHOOK_URL    = 'https://webhook.site/97746e0e-6905-498a-afde-3e5fb39fd3a4';
+    const AVATAR_BASE_URL = 'https://meet.avatar.us.kaltura.ai/6931df33dd072609137dfe46/talk-to-agent';
+    const AVATAR_PARAMS   = { aiclid: 'eHkahqrU', flow_id: 'agent-30' };
 
     const QUESTIONS = [
       { label: 'Q1 — Easy',         question: 'Who is this person?',                                                                              answer: 'Tyrion Lannister' },
@@ -309,32 +310,16 @@
       return { timeStr, dateStr, period, greeting };
     }
 
-    // ── Build DPP ────────────────────────────────────────────────────────────
-    function buildDPPContent() {
-      const ctx  = getTimeContext();
-      const page = document.getElementById('lore').innerText.trim();
-      return [
-        'SYSTEM INJECTION — Session Start:',
-        '- Student name: '     + userName,
-        '- Current time: '     + ctx.timeStr + ' on ' + ctx.dateStr,
-        '- Time period: '      + ctx.period,
-        '- Greeting to use: "' + ctx.greeting + ', ' + userName + '!"',
-        '- Page: Game of Thrones Trivia Challenge',
-        '- Page context: '     + page,
-        '',
-        'Instructions: Speak your greeting out loud as your very first line, addressing ' + userName + ' by name. Then introduce yourself as Ashara Dayne of Starfall and begin the trivia challenge. Increase difficulty on correct answers (max 5), decrease on incorrect (min 1). At session end, output the full JSON schema summary.'
-      ].join('\n');
-    }
-
-    // ── Inject DPP ───────────────────────────────────────────────────────────
-    function injectContext() {
-      const iframe = document.getElementById('got-avatar');
-      if (iframe && iframe.contentWindow) {
-        iframe.contentWindow.postMessage(
-          { type: 'eself-dynamic-prompt-message', content: buildDPPContent() },
-          '*'
-        );
-      }
+    // ── Build avatar URL with user name baked in ─────────────────────────────
+    function buildAvatarURL(name) {
+      const ctx = getTimeContext();
+      const prompt = 'userID=got-' + Date.now()
+        + ' user name is ' + name
+        + '. Open with exactly this greeting: "' + ctx.greeting + ', ' + name + '!"';
+      const params = Object.assign({}, AVATAR_PARAMS, { prompt: prompt });
+      return AVATAR_BASE_URL + '?' + Object.entries(params)
+        .map(function(entry) { return encodeURIComponent(entry[0]) + '=' + encodeURIComponent(entry[1]); })
+        .join('&');
     }
 
     // ── Results helpers ──────────────────────────────────────────────────────
@@ -453,9 +438,7 @@
       session.score        = 0;
       session.transcript   = [];
       userName = '';
-      // Reload the iframe so the avatar resets
-      const iframe = document.getElementById('got-avatar');
-      iframe.src = iframe.src;
+      document.getElementById('got-avatar').src = '';
     }
 
     // ── Start session ─────────────────────────────────────────────────────────
@@ -467,7 +450,7 @@
       document.getElementById('avatar-container').style.display = 'block';
       document.getElementById('status-bar').style.display       = 'block';
 
-      setTimeout(injectContext, 3000);
+      document.getElementById('got-avatar').src = buildAvatarURL(name);
 
       window.addEventListener('message', function (event) {
         const d = event.data;

@@ -112,6 +112,16 @@ This is a Studio-side configuration change, not a code change. Everything else �
 
 ---
 
+## Known Issue: Trivia Question Images Not Displaying
+
+The avatar is configured to show image clues with the first three trivia questions (e.g., a photo of Tyrion Lannister for Q1). These images are **not rendering** during the session.
+
+**Root cause:** The images are configured inside the eself Studio flow — they are not served by this webpage. The issue is with the image assets or their configuration within the eself/Kaltura backend, not with the HTML or JavaScript here.
+
+**What to do:** Log into eself Studio, open the flow for agent-30, and verify that the image assets attached to questions 1–3 are valid, accessible URLs. Re-upload or re-link the images if needed.
+
+---
+
 ## Technical Notes
 
 ### Why Not the Kaltura Iframe SDK?
