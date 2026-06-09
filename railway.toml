@@ -1,2 +1,2 @@
 [deploy]
-startCommand = "npx serve . --listen $PORT"
+startCommand = "nginx -g 'daemon off;'"
