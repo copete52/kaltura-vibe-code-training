@@ -1,5 +1,4 @@
 FROM nginx:alpine
 COPY . /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/templates/default.conf.template
-EXPOSE 8080
-CMD ["/bin/sh", "-c", "envsubst '$PORT' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+RUN echo "server { listen 8082; root /usr/share/nginx/html; index index.html; location / { try_files \$uri \$uri/ /index.html; } }" > /etc/nginx/conf.d/default.conf
+EXPOSE 8082
